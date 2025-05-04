@@ -54,8 +54,9 @@ const WhyChooseUs: React.FC = () => {
                   </div>
                   <Image
                     width={400}
-                    priority
                     height={400}
+                    loading="eager"
+                    priority
                     src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${item?.img}`}
                     alt={item?.title || ""}
                     className="w-[50%] aspect-square rounded-full object-cover translate-x-[-100px] opacity-80"

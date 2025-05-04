@@ -42,28 +42,30 @@ const WhyChooseUs: React.FC = () => {
           </p>
         </div>
         <div className="flex flex-col lg:flex-row items-center mt-12 justify-center">
-          {whyChooseUsData.advantages.map(
-            (item, index) =>
-              item.id == activeTab && (
-                <div className="w-[60%] flex relative" key={index}>
-                  <div className="bg-[#A15573] z-10 w-[50%] aspect-square bg-opacity-80 rounded-full flex flex-col justify-center text-white p-8 transform transition-transform duration-500 opacity-80">
-                    <h3 className="text-2xl text-left font-semibold mb-3 px-2">
-                      {item?.title}
-                    </h3>
-                    <p className="text-center">{item?.description}</p>
-                  </div>
-                  <Image
-                    width={400}
-                    height={400}
-                    loading="eager"
-                    priority
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${item?.img}`}
-                    alt={item?.title || ""}
-                    className="w-[50%] aspect-square rounded-full object-cover translate-x-[-100px] opacity-80"
-                  />
-                </div>
-              )
-          )}
+          {whyChooseUsData.advantages.map((item, index) => (
+            <div
+              className={`w-[60%] flex relative ${
+                item.id !== activeTab && "hidden"
+              }`}
+              key={index}
+            >
+              <div className="bg-[#A15573] z-10 w-[50%] aspect-square bg-opacity-80 rounded-full flex flex-col justify-center text-white p-8 transform transition-transform duration-500 opacity-80">
+                <h3 className="text-2xl text-left font-semibold mb-3 px-2">
+                  {item?.title}
+                </h3>
+                <p className="text-center">{item?.description}</p>
+              </div>
+              <Image
+                width={400}
+                height={400}
+                loading="eager"
+                priority
+                src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${item?.img}`}
+                alt={item?.title || ""}
+                className="w-[50%] aspect-square rounded-full object-cover translate-x-[-100px] opacity-80"
+              />
+            </div>
+          ))}
           <div className="w-[40%] flex flex-col gap-4">
             {whyChooseUsData?.advantages.map((adv) => (
               <button
@@ -72,7 +74,7 @@ const WhyChooseUs: React.FC = () => {
                 className={`text-left py-4 pl-4 pr-8 rounded-full text-lg flex justify-between font-bold items-center transition-all duration-300 ${
                   activeTab === adv.id
                     ? "bg-[#A15573] text-white"
-                    : "bg-gray-100 text-gray-800 hover:bg-gray-500"
+                    : "bg-gray-100 text-gray-800 hover:bg-[#A15573]/30"
                 }`}
               >
                 &lt;

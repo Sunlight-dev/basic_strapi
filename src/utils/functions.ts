@@ -1,5 +1,5 @@
 import qs from "qs";
-import { Advantage, JsonDataType, WhyChooseType } from "./types";
+import { Advantage, JsonDataType, SEOType, WhyChooseType } from "./types";
 
 export async function fetchAPI(
   path: string,
@@ -28,6 +28,19 @@ export async function fetchAPI(
   }
 }
 
+export function transformData(data: JsonDataType): WhyChooseType {
+  return {
+    title: data.title,
+    description: data.simple_description,
+    advantages: data.advantages.map((adv: Advantage) => ({
+      id: adv.id.toString(),
+      title: adv.title,
+      description: adv.description,
+      img: adv.img.url,
+    })),
+  };
+}
+
 export async function fetchWhyChooseUsData() {
   try {
     const path = "/why-choose-uses";
@@ -47,15 +60,22 @@ export async function fetchWhyChooseUsData() {
   }
 }
 
-export function transformData(data: JsonDataType): WhyChooseType {
-  return {
-    title: data.title,
-    description: data.simple_description,
-    advantages: data.advantages.map((adv: Advantage) => ({
-      id: adv.id.toString(),
-      title: adv.title,
-      description: adv.description,
-      img: adv.img.url,
-    })),
-  };
+export async function fetchMetaData() {
+  try {
+    const path = "/why-choose-uses";
+    const urlParamsObject = {
+      populate: ["seo.openGraph", "seo.openGraph.ogImage", "seo.metaImage"],
+    };
+    const responseData = await fetchAPI(path, urlParamsObject, "");
+    const tempRawData: SEOType = responseData.data[0].seo;
+    return tempRawData;
+  } catch (err) {
+    const error =
+      err instanceof Error ? err : new Error("Failed to fetch data");
+    console.error("Error fetching services:", error);
+  }
+}
+
+export function getStrapiURL(path = "") {
+  return `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${path}`;
 }

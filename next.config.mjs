@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "strapitest-production-f1f1.up.railway.app",
       },
+      {
+        protocol: "http",
+        hostname: "192.168.142.33",
+      },
     ],
   },
   env: {

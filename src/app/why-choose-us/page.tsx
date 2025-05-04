@@ -27,9 +27,9 @@ const WhyChooseUs: React.FC = () => {
   return (
     <section
       id="why-us"
-      className="bg-white w-screen h-screen flex items-center justify-center"
+      className="bg-white flex items-center justify-center py-20 lg:w-screen lg:h-screen"
     >
-      <div className="container px-4 md:px-6">
+      <div className="max-w-[1366px] px-4 md:px-6">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-medium text-gray-800 mb-2">
             Why Choose Us
@@ -37,14 +37,14 @@ const WhyChooseUs: React.FC = () => {
           <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {whyChooseUsData?.title}
           </h3>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 w-[90%] mx-auto">
             {whyChooseUsData?.description}
           </p>
         </div>
-        <div className="flex flex-col lg:flex-row items-center mt-12 justify-center">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 items-center mt-12 justify-center">
           {whyChooseUsData.advantages.map((item, index) => (
             <div
-              className={`w-[60%] flex relative ${
+              className={`lg:w-[60%] w-[80%] flex relative translate-x-[50px] lg:translate-x-0 ${
                 item.id !== activeTab && "hidden"
               }`}
               key={index}
@@ -66,12 +66,12 @@ const WhyChooseUs: React.FC = () => {
               />
             </div>
           ))}
-          <div className="w-[40%] flex flex-col gap-4">
+          <div className="lg:w-[40%] w-[80%] flex flex-col gap-6">
             {whyChooseUsData?.advantages.map((adv) => (
               <button
                 key={adv.id}
                 onClick={() => handleTabClick(adv.id)}
-                className={`text-left py-4 pl-4 pr-8 rounded-full text-lg flex justify-between font-bold items-center transition-all duration-300 ${
+                className={`h-full text-left py-4 pl-4 pr-8 rounded-full text-lg flex justify-between font-bold items-center transition-all duration-300 ${
                   activeTab === adv.id
                     ? "bg-[#A15573] text-white"
                     : "bg-gray-100 text-gray-800 hover:bg-[#A15573]/30"

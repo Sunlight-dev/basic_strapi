@@ -67,3 +67,29 @@ interface ImageFormat {
   height: number;
   sizeInBytes: number;
 }
+
+export interface SEOType {
+  metaTitle: string;
+  metaDescription: string;
+  keywords?: string;
+  metaRobots?: string;
+  metaViewport: string;
+  structuredData?: string;
+  metaImage?: Image;
+  canonicalURL: string;
+  metaSocial: [
+    {
+      socialNetwork: string;
+      title: string;
+      description: string;
+      image: string;
+    }
+  ];
+  openGraph: {
+    ogTitle?: string;
+    ogDescription?: string;
+    ogURL?: string;
+    ogType?: string;
+    ogImage?: Image;
+  };
+}

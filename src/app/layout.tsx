@@ -36,7 +36,6 @@ export async function generateMetadata(): Promise<Metadata | null> {
   if (!seoData) {
     return null;
   }
-  console.log(seoData);
   return {
     title: seoData?.metaTitle,
     description: seoData?.metaDescription,
